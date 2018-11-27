@@ -48,6 +48,13 @@ public class ProfileBean {
         baseUrl = "http://192.168.99.100:8080"; // only for demonstration
     }
 
+    public List<Profile> getProfiles() {
+
+        TypedQuery<Profile> query = em.createNamedQuery("Profile.getAll", Profile.class);
+
+        return query.getResultList();
+
+    }
 
     public Profile getProfileById(Integer id) {
 

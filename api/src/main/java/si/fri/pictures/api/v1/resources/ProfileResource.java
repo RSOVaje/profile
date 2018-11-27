@@ -26,6 +26,16 @@ public class ProfileResource {
     @Context
     protected UriInfo uriInfo;
 
+    @GET
+    @Path("/")
+    public Response getPrfoiles() {
+        List<Profile> profiles = profileBean.getProfiles();
+        if (profiles == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(profiles).build();
+    }
+
     @POST
     public Response createProfile(Profile profile) {
 

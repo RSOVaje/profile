@@ -10,7 +10,8 @@ import java.util.List;
 
 @Entity(name = "profile")
 @NamedQueries(value = {
-        @NamedQuery(name = "Profile.getById", query = "SELECT p FROM profile p WHERE p.id = :id")
+        @NamedQuery(name = "Profile.getById", query = "SELECT p FROM profile p WHERE p.id = :id"),
+        @NamedQuery(name = "Profile.getAll", query = "SELECT p FROM profile p")
 })
 public class Profile {
 
