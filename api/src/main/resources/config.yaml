@@ -1,0 +1,24 @@
+kumuluzee:
+  name: profile
+  env:
+    name: dev
+  version: 1.0.0
+  server:
+    base-url: http://localhost:8081
+    http:
+      port: 8081
+  datasources:
+  - jndi-name: profile
+    connection-url: jdbc:postgresql://192.168.99.100:5433/profile
+    username: postgres
+    password: admin
+    max-pool-size: 20
+  #config:
+   # etcd:
+    #  hosts: http://192.168.99.100:2379
+  #discovery:
+   # etcd:
+   #   hosts: http://192.168.99.100:2379
+#app-properties:
+ # external-services:
+ #   enabled: false

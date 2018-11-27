@@ -1,0 +1,2 @@
+INSERT INTO profile (id, ime, priimek, mail) VALUES ('1', 'janez', 'novak', 'janez.novag@gmail.com');
+INSERT INTO profile (id, ime, priimek, mail) VALUES ('2', 'jana', 'novak', 'jana.novag@gmail.com');
