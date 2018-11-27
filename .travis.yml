@@ -21,5 +21,5 @@ script:
 - docker build -t "$DOCKER_IMAGE" .
 
 after_success:
-- echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+- docker login --username=rsovaje --password=rsovaje123
 - docker push "$DOCKER_IMAGE"
