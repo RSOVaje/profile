@@ -40,7 +40,7 @@ public class ProfileResource {
     }
 
     /*@GET
-    @Path("slike/{idProfila}")
+    @Path("catalogi/{idProfila}")
     public Response getCataloguesByPerson(@PathParam("idProfila") Integer idProfila) {
         List<Catalogue> list = profileBean.getCataloguesByPerson(idProfila);
         if (list == null) {
