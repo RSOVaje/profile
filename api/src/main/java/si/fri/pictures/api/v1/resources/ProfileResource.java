@@ -27,7 +27,6 @@ public class ProfileResource {
     protected UriInfo uriInfo;
 
     @GET
-    @Path("/")
     public Response getPrfoiles() {
         List<Profile> profiles = profileBean.getProfiles();
         if (profiles == null) {
