@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: profile-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: profile
+  template:
+    metadata:
+      labels:
+        app: profile
+    spec:
+      containers:
+      - image: rsovaje/profile:0.1
+        name: profile
+        env:
+        - name: KUMULUZEE_DISCOVERY_CLUSTER
+          value: gcloud
+        - name: KUMULUZEE_SERVER_BASEURL
+          value: http://172.21.134.224:31104
+        - name: KUMULUZEE_DATASOURCES0_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: pg-pass
+              key: KUMULUZEE_DATASOURCES0_PASSWORD
+        ports:
+        - containerPort: 8081
+          name: server
+          protocol: TCP
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: profile
+spec:
+  type: NodePort
+  ports:
+  - port: 8081
+    protocol: TCP
+    targetPort: 8081
+  selector:
+    app: profile
