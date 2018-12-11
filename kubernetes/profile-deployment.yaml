@@ -17,14 +17,18 @@ spec:
         name: profile
         env:
         - name: KUMULUZEE_DISCOVERY_CLUSTER
-          value: gcloud
-        - name: KUMULUZEE_SERVER_BASEURL
-          value: http://172.21.134.224:31104
-        - name: KUMULUZEE_DATASOURCES0_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: pg-pass
-              key: KUMULUZEE_DATASOURCES0_PASSWORD
+            value: gcloud
+            - name: KUMULUZEE_SERVER_BASEURL
+              value: http://172.21.134.224:31104
+            - name: KUMULUZEE_DATASOURCES0_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: pg-pass
+                  key: KUMULUZEE_DATASOURCES0_PASSWORD
+            - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
+              value: jdbc:postgresql://sl-eu-gb-p00.dblayer.com:16083/compose
+            - name: KUMULUZEE_DATASOURCES0_USERNAME
+              value: admin
         ports:
         - containerPort: 8081
           name: server
