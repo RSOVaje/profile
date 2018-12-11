@@ -45,7 +45,7 @@ public class ProfileBean {
     @PostConstruct
     private void init() {
         httpClient = ClientBuilder.newClient();
-        baseUrl = "http://192.168.99.100:8080"; // only for demonstration
+        baseUrl = "http://159.122.177.26:30304"; // only for demonstration
     }
 
     public List<Profile> getProfiles() {
