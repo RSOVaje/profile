@@ -42,11 +42,16 @@ public class ProfileBean {
     private Client httpClient;
     private String baseUrl;
 
+    @Inject
+    @DiscoverService("catalogue-management-service")
+    private Optional<String> catalogueUrl;
+
     @PostConstruct
     private void init() {
         httpClient = ClientBuilder.newClient();
-        baseUrl = "http://159.122.177.26:30304"; // only for demonstration
+        //baseUrl = "http://159.122.177.26:30304"; // only for demonstration
     }
+
 
     public List<Profile> getProfiles() {
 
@@ -76,17 +81,18 @@ public class ProfileBean {
 
 
     public List<Catalogue> getCatalogues(Integer profileId) {
-
-        try {
-            return httpClient
-                    .target(baseUrl + "/v1/catalogue/profil/" + profileId)
-                    .request().get(new GenericType<List<Catalogue>>() {
-                    });
-        } catch (WebApplicationException | ProcessingException e) {
-            log.severe(e.getMessage());
-            throw new InternalServerErrorException(e);
+        if(catalogueUrl.isPresent()) {
+            try {
+                return httpClient
+                        .target(catalogueUrl.get() + "/v1/catalogue/profil/" + profileId)
+                        .request().get(new GenericType<List<Catalogue>>() {
+                        });
+            } catch (WebApplicationException | ProcessingException e) {
+                log.severe(e.getMessage());
+                throw new InternalServerErrorException(e);
+            }
         }
-
+        return null;
     }
 
    /* public List<Catalogue> getCataloguesByPerson(Integer profileId) {

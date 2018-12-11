@@ -82,6 +82,7 @@
         <artifactId>services</artifactId>
         <version>${project.version}</version>
       </dependency>
+
       <dependency>
         <groupId> org.apache.cassandra</groupId>
         <artifactId>cassandra-all</artifactId>
