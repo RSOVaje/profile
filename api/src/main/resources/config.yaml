@@ -13,6 +13,10 @@ kumuluzee:
     username: postgres
     password: admin
     max-pool-size: 20
+  health:
+    checks:
+      data-source-health-check:
+        jndi-name: profile
   config:
     etcd:
       hosts: http://192.168.99.100:2379
@@ -21,4 +25,5 @@ kumuluzee:
       hosts: http://192.168.99.100:2379
 app-properties:
   external-services:
-    enabled: false
+    enabled: true
+  healthy: true
