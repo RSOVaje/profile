@@ -4,7 +4,7 @@ import si.fri.pictures.models.dtos.Catalogue;
 import si.fri.pictures.models.entities.Profile;
 import si.fri.pictures.services.beans.ProfileBean;
 
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Context;
@@ -14,7 +14,7 @@ import javax.ws.rs.core.UriInfo;
 import java.util.List;
 
 
-@RequestScoped
+@ApplicationScoped
 @Path("/profile")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
@@ -24,7 +24,7 @@ public class ProfileResource {
     private ProfileBean profileBean;
 
     @Context
-    protected UriInfo uriInfo;
+    UriInfo uriInfo;
 
     @GET
     public Response getPrfoiles() {
