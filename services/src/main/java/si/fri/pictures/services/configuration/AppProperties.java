@@ -9,7 +9,7 @@ import javax.enterprise.context.ApplicationScoped;
 @ConfigBundle("app-properties")
 public class AppProperties {
 
-    @ConfigValue(value = "external-services.enabled", watch = true)
+    @ConfigValue(value = "external-services.enabled", watch = false)
     private boolean externalServicesEnabled;
 
 
