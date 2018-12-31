@@ -43,7 +43,7 @@ public class ProfileBean {
     private String baseUrl;
 
     @Inject
-    @DiscoverService("catalogue-management-service")
+    @DiscoverService("catalogue")
     private Optional<String> catalogueUrl;
 
     @PostConstruct

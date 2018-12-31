@@ -60,6 +60,14 @@
             <version>2.2</version>
             <scope>compile</scope>
         </dependency>
+        <dependency>
+            <groupId>com.kumuluz.ee.metrics</groupId>
+            <artifactId>kumuluzee-metrics-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.kumuluz.ee.fault.tolerance</groupId>
+            <artifactId>kumuluzee-fault-tolerance-hystrix</artifactId>
+        </dependency>
     </dependencies>
     
 </project>
