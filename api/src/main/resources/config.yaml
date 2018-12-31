@@ -23,6 +23,10 @@ kumuluzee:
   discovery:
     etcd:
       hosts: http://192.168.99.100:2379
+  metrics:
+    web-instrumentation:
+    - name: customers-endpoint
+      url-pattern: /v1/profiles/*
 app-properties:
   external-services:
     enabled: true

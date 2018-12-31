@@ -3,6 +3,7 @@ package si.fri.pictures.services.beans;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
+import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.pictures.models.dtos.Catalogue;
 import si.fri.pictures.models.entities.Profile;
 import si.fri.pictures.services.configuration.AppProperties;
@@ -79,7 +80,7 @@ public class ProfileBean {
 
     }
 
-
+    @Timed
     public List<Catalogue> getCatalogues(Integer profileId) {
         if(appProperties.isExternalServicesEnabled() && catalogueUrl.isPresent()) {
             try {
