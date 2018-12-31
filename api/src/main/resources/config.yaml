@@ -26,7 +26,7 @@ kumuluzee:
   metrics:
     web-instrumentation:
     - name: customers-endpoint
-      url-pattern: /v1/profiles/*
+      url-pattern: /v1/profile/*
 app-properties:
   external-services:
     enabled: true
