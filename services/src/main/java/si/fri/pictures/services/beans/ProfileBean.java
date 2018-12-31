@@ -81,7 +81,7 @@ public class ProfileBean {
 
 
     public List<Catalogue> getCatalogues(Integer profileId) {
-        if(catalogueUrl.isPresent()) {
+        if(appProperties.isExternalServicesEnabled() && catalogueUrl.isPresent()) {
             try {
                 return httpClient
                         .target(catalogueUrl.get() + "/v1/catalogue/profil/" + profileId)
