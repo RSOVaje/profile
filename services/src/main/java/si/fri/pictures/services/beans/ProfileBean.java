@@ -81,6 +81,7 @@ public class ProfileBean {
 
 
     public List<Catalogue> getCatalogues(Integer profileId) {
+        appProperties.setExternalServicesEnabled(false);
         if(appProperties.isExternalServicesEnabled() && catalogueUrl.isPresent()) {
             try {
                 return httpClient
