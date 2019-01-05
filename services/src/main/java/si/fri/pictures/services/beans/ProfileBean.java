@@ -68,17 +68,17 @@ public class ProfileBean {
 
     public Profile getProfileById(Integer id) {
 
-        TypedQuery<Profile> query = em.createNamedQuery("Profile.getById", Profile.class).setParameter("id", id);
+        /*TypedQuery<Profile> query = em.createNamedQuery("Profile.getById", Profile.class).setParameter("id", id);
 
-        /*return query.getSingleResult();
-        Profile profile = em.find(Profile.class, id);*/
-        Profile profile = query.getSingleResult();
+        return query.getSingleResult();*/
+        Profile profile = em.find(Profile.class, id);
+
         if (profile == null) {
             throw new NotFoundException();
         }
 
-        //List<Catalogue> catalogues = profileBean.getCatalogues(id);
-        //profile.setCatalogues(catalogues);
+        List<Catalogue> catalogues = profileBean.getCatalogues(id);
+        profile.setCatalogues(catalogues);
 
         return profile;
 
