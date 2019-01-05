@@ -117,9 +117,10 @@ public class ProfileBean {
             em.persist(profile);
             commitTx();
         } catch (Exception e) {
+            log.warning("Tezava z dodajanjem profila z id " + profile.getId());
             rollbackTx();
         }
-
+        log.info("Uspesno dodan profil z id " + profile.getId());
         return profile;
     }
 
