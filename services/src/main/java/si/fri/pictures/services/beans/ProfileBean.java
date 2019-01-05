@@ -3,6 +3,9 @@ package si.fri.pictures.services.beans;
 import com.kumuluz.ee.discovery.annotations.DiscoverService;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
+import org.eclipse.microprofile.faulttolerance.CircuitBreaker;
+import org.eclipse.microprofile.faulttolerance.Fallback;
+import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.pictures.models.dtos.Catalogue;
 import si.fri.pictures.models.entities.Profile;
@@ -21,6 +24,7 @@ import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -80,6 +84,9 @@ public class ProfileBean {
     }
 
     @Timed
+    @CircuitBreaker(requestVolumeThreshold = 3)
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+    @Fallback(fallbackMethod = "getPhotosFallback")
     public List<Catalogue> getCatalogues(Integer profileId) {
         if(appProperties.isExternalServicesEnabled() && catalogueUrl.isPresent()) {
             try {
