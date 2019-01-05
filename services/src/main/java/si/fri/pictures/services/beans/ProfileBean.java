@@ -77,8 +77,8 @@ public class ProfileBean {
             throw new NotFoundException();
         }
 
-        List<Catalogue> catalogues = profileBean.getCatalogues(id);
-        profile.setCatalogues(catalogues);
+        //List<Catalogue> catalogues = profileBean.getCatalogues(id);
+        //profile.setCatalogues(catalogues);
 
         return profile;
 
