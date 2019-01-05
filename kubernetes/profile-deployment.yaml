@@ -23,7 +23,7 @@ spec:
         - name: KUMULUZEE_CONFIG_ETCD_HOSTS
           value: http://etcd:2379
         - name: KUMULUZEE_SERVER_BASEURL
-          value: http://172.21.134.224:31104
+          value: http://159.122.177.26:31104
         - name: KUMULUZEE_DATASOURCES0_PASSWORD
           valueFrom:
             secretKeyRef:
