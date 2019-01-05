@@ -24,6 +24,7 @@ import javax.ws.rs.core.GenericType;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
+import javax.ws.rs.core.UriInfo;
 
 @RequestScoped
 public class ProfileBean {
