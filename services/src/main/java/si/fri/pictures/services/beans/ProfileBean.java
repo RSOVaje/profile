@@ -68,11 +68,11 @@ public class ProfileBean {
 
     public Profile getProfileById(Integer id) {
 
-        /*TypedQuery<Profile> query = em.createNamedQuery("Profile.getById", Profile.class).setParameter("id", id);
+        TypedQuery<Profile> query = em.createNamedQuery("Profile.getById", Profile.class).setParameter("id", id);
 
-        return query.getSingleResult();*/
-        Profile profile = em.find(Profile.class, id);
-
+        /*return query.getSingleResult();
+        Profile profile = em.find(Profile.class, id);*/
+        Profile profile = query.getSingleResult();
         if (profile == null) {
             throw new NotFoundException();
         }
