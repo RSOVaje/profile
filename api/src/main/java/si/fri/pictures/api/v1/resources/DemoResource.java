@@ -2,15 +2,12 @@ package si.fri.pictures.api.v1.resources;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.logging.Logger;
-import com.kumuluz.ee.common.runtime.EeRuntime;
 import com.kumuluz.ee.logs.cdi.Log;
-import si.fri.pictures.api.v1.dtos.Health;
+import si.fri.pictures.api.v1.dtos.HealthD;
 import si.fri.pictures.services.configuration.AppProperties;
 
 @Path("demo")
@@ -26,8 +23,9 @@ public class DemoResource {
     private AppProperties appProperties;
 
     @POST
+
     @Path("healthy")
-    public Response setHealth(Health health) {
+    public Response setHealth(HealthD health) {
         appProperties.setHealthy(health.getHealthy());
         log.info("Setting health to " + health.getHealthy());
         return Response.ok().build();

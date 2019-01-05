@@ -1,6 +1,6 @@
 package si.fri.pictures.api.v1.dtos;
 
-public class Health {
+public class HealthD {
     private Boolean healthy;
 
     public Boolean getHealthy() {
