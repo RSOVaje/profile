@@ -25,6 +25,7 @@ import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
 import java.time.temporal.ChronoUnit;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -86,7 +87,7 @@ public class ProfileBean {
     @Timed
     @CircuitBreaker(requestVolumeThreshold = 3)
     @Timeout(value = 2, unit = ChronoUnit.SECONDS)
-    @Fallback(fallbackMethod = "getPhotosFallback")
+    @Fallback(fallbackMethod = "getCataloguesFallback")
     public List<Catalogue> getCatalogues(Integer profileId) {
         if(appProperties.isExternalServicesEnabled() && catalogueUrl.isPresent()) {
             try {
@@ -100,6 +101,9 @@ public class ProfileBean {
             }
         }
         return null;
+    }
+    public List<Catalogue> getCataloguesFallback(Integer profileId) {
+        return Collections.emptyList();
     }
 
    /* public List<Catalogue> getCataloguesByPerson(Integer profileId) {
