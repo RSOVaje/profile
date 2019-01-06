@@ -23,10 +23,6 @@ kumuluzee:
   discovery:
     etcd:
       hosts: http://192.168.99.100:2379
-  metrics:
-    web-instrumentation:
-    - name: profile-endpoint
-      url-pattern: /v1/profile/*
   logs:
     config-file: '<?xml version="1.0" encoding="UTF-8"?>
                       <Configuration name="profile">
