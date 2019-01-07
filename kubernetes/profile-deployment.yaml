@@ -30,7 +30,7 @@ spec:
               name: pg-pass
               key: KUMULUZEE_DATASOURCES0_PASSWORD
         - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
-          value: jdbc:postgresql://sl-eu-gb-p00.dblayer.com:16083/compose
+          value: jdbc:postgresql://sl-eu-gb-p00.dblayer.com:16880/compose
         - name: KUMULUZEE_DATASOURCES0_USERNAME
           value: admin
         ports:

@@ -10,7 +10,7 @@ import com.kumuluz.ee.logs.cdi.Log;
 import si.fri.pictures.api.v1.dtos.HealthD;
 import si.fri.pictures.services.configuration.AppProperties;
 
-@Path("demo")
+@Path("/demo")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 @ApplicationScoped
