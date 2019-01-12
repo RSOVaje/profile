@@ -13,7 +13,7 @@ import si.fri.pictures.services.configuration.AppProperties;
 
 
 import javax.annotation.PostConstruct;
-import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -29,9 +29,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
-import javax.ws.rs.core.UriInfo;
 
-@RequestScoped
+@ApplicationScoped
 public class ProfileBean {
 
     private Logger log = Logger.getLogger(ProfileBean.class.getName());
