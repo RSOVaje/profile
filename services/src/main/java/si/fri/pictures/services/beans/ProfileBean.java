@@ -8,6 +8,7 @@ import org.eclipse.microprofile.faulttolerance.Fallback;
 import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.pictures.models.dtos.Catalogue;
+import si.fri.pictures.models.dtos.Picture;
 import si.fri.pictures.models.entities.Profile;
 import si.fri.pictures.services.configuration.AppProperties;
 
@@ -50,6 +51,10 @@ public class ProfileBean {
     @DiscoverService("catalogue")
     private Optional<String> catalogueUrl;
 
+    @Inject
+    @DiscoverService("picture")
+    private Optional<String> pictureUrl;
+
     @PostConstruct
     private void init() {
         httpClient = ClientBuilder.newClient();
@@ -79,6 +84,9 @@ public class ProfileBean {
         List<Catalogue> catalogues = profileBean.getCatalogues(id);
         profile.setCatalogues(catalogues);
 
+        List<Picture> pictures = profileBean.getPicture(id);
+        profile.setPictures(pictures);
+
         return profile;
 
     }
@@ -105,6 +113,21 @@ public class ProfileBean {
         return Collections.emptyList();
     }
 
+
+    public List<Picture> getPicture(Integer profileId) {
+        if(appProperties.isExternalServicesEnabled() && pictureUrl.isPresent()) {
+            try {
+                return httpClient
+                        .target(pictureUrl.get() + "/v1/picture/profil/" + profileId)
+                        .request().get(new GenericType<List<Picture>>() {
+                        });
+            } catch (WebApplicationException | ProcessingException e) {
+                log.severe(e.getMessage());
+                throw new InternalServerErrorException(e);
+            }
+        }
+        return null;
+    }
    /* public List<Catalogue> getCataloguesByPerson(Integer profileId) {
 
         try {

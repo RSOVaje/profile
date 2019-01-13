@@ -4,6 +4,7 @@ package si.fri.pictures.models.entities;
 
 
 import si.fri.pictures.models.dtos.Catalogue;
+import si.fri.pictures.models.dtos.Picture;
 
 import javax.persistence.*;
 import java.util.List;
@@ -22,6 +23,8 @@ public class Profile {
     @Transient
     private List<Catalogue> catalogues;
 
+    @Transient
+    private List<Picture> pictures;
 
     private String ime;
     private String priimek;
@@ -65,5 +68,13 @@ public class Profile {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public List<Picture> getPictures() {
+        return pictures;
+    }
+
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 }
