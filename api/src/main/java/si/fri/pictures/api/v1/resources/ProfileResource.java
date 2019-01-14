@@ -90,12 +90,15 @@ public class ProfileResource {
         return Response.status(Response.Status.OK).entity(shares).build();
     }
 
-    /*@POST
+    @POST
     @Path("share")
     public Response sharePhoto(Share share) {
-        Boolean b = profileBean.sharePhoto(share);
-        return Response.status(Response.Status.OK).entity(b).build();
-    }*/
+        Share s = profileBean.sharePhoto(share);
+        if (s == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(s).build();
+    }
 
 
 }

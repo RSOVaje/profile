@@ -22,6 +22,7 @@ import javax.persistence.TypedQuery;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.Response;
 import java.time.temporal.ChronoUnit;
@@ -162,21 +163,20 @@ public class ProfileBean {
         return null;
     }
 
-    /*public Boolean sharePhoto(Share share) {
+    public Share sharePhoto(Share share) {
 
         if(appProperties.isExternalServicesEnabled() && shareUrl.isPresent()) {
             try {
                 return httpClient
-                        .target(shareUrl.get() + "/v1/share/?" + share.getIdProfila()+"&")
-                        .request().get(new GenericType<Boolean>() {
-                        });
+                        .target(shareUrl.get() + "/v1/share")
+                        .request().post(Entity.json(share), Share.class);
             } catch (WebApplicationException | ProcessingException e) {
                 log.severe(e.getMessage());
                 throw new InternalServerErrorException(e);
             }
         }
         return null;
-    }*/
+    }
 
 
    /* public List<Catalogue> getCataloguesByPerson(Integer profileId) {
