@@ -1,12 +1,18 @@
 package si.fri.pictures.models.dtos;
 
+import javax.persistence.Column;
+import javax.persistence.Transient;
+import java.util.List;
+
 public class Catalogue {
 
     private Integer id;
 
-    private Byte[] picture;
+    @Transient
+    private List<Picture> pictures;
 
     private Integer idProfila;
+
 
     private String opis;
 
@@ -14,8 +20,11 @@ public class Catalogue {
     public Integer getId() {
         return id;
     }
-    public Byte[] getPicture() {
-        return picture;
+
+
+
+    public List<Picture> getPictures() {
+        return pictures;
     }
 
     public Integer getIdProfila() {
@@ -30,12 +39,12 @@ public class Catalogue {
         this.id = id;
     }
 
-    public void setPicture(Byte[] picture) {
-        this.picture = picture;
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 
     public void setIdProfila(Integer idProfila) {
-        idProfila = idProfila;
+        this.idProfila = idProfila;
     }
 
     public void setOpis(String opis) {

@@ -9,6 +9,7 @@ import org.eclipse.microprofile.faulttolerance.Timeout;
 import org.eclipse.microprofile.metrics.annotation.Timed;
 import si.fri.pictures.models.dtos.Catalogue;
 import si.fri.pictures.models.dtos.Picture;
+import si.fri.pictures.models.dtos.Share;
 import si.fri.pictures.models.entities.Profile;
 import si.fri.pictures.services.configuration.AppProperties;
 
@@ -18,13 +19,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.NotFoundException;
-import javax.ws.rs.ProcessingException;
-import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.GenericType;
+import javax.ws.rs.core.Response;
 import java.time.temporal.ChronoUnit;
 import java.util.Collections;
 import java.util.List;
@@ -54,6 +53,10 @@ public class ProfileBean {
     @Inject
     @DiscoverService("picture")
     private Optional<String> pictureUrl;
+
+    @Inject
+    @DiscoverService("share")
+    private Optional<String> shareUrl;
 
     @PostConstruct
     private void init() {
@@ -128,6 +131,54 @@ public class ProfileBean {
         }
         return null;
     }
+
+    public List<Share> getSharesOfProfile(Integer id) {
+        if(appProperties.isExternalServicesEnabled() && shareUrl.isPresent()) {
+            try {
+                return httpClient
+                        .target(shareUrl.get() + "/v1/share/profil/" + id)
+                        .request().get(new GenericType<List<Share>>() {
+                        });
+            } catch (WebApplicationException | ProcessingException e) {
+                log.severe(e.getMessage());
+                throw new InternalServerErrorException(e);
+            }
+        }
+        return null;
+    }
+
+    public List<Share> getAllowedPhotosOfProfile(Integer id) {
+        if(appProperties.isExternalServicesEnabled() && shareUrl.isPresent()) {
+            try {
+                return httpClient
+                        .target(shareUrl.get() + "/v1/share/allowed/" + id)
+                        .request().get(new GenericType<List<Share>>() {
+                        });
+            } catch (WebApplicationException | ProcessingException e) {
+                log.severe(e.getMessage());
+                throw new InternalServerErrorException(e);
+            }
+        }
+        return null;
+    }
+
+    /*public Boolean sharePhoto(Share share) {
+
+        if(appProperties.isExternalServicesEnabled() && shareUrl.isPresent()) {
+            try {
+                return httpClient
+                        .target(shareUrl.get() + "/v1/share/?" + share.getIdProfila()+"&")
+                        .request().get(new GenericType<Boolean>() {
+                        });
+            } catch (WebApplicationException | ProcessingException e) {
+                log.severe(e.getMessage());
+                throw new InternalServerErrorException(e);
+            }
+        }
+        return null;
+    }*/
+
+
    /* public List<Catalogue> getCataloguesByPerson(Integer profileId) {
 
         try {

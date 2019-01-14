@@ -1,6 +1,7 @@
 package si.fri.pictures.api.v1.resources;
 
 import si.fri.pictures.models.dtos.Catalogue;
+import si.fri.pictures.models.dtos.Share;
 import si.fri.pictures.models.entities.Profile;
 import si.fri.pictures.services.beans.ProfileBean;
 
@@ -68,5 +69,33 @@ public class ProfileResource {
         }
         return Response.status(Response.Status.OK).entity(profile).build();
     }
+
+    @GET
+    @Path("shared/{id}")
+    public Response getSharesOfProfile(@PathParam("id") Integer id) {
+        List<Share> shares = profileBean.getSharesOfProfile(id);
+        if (shares == null) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(shares).build();
+    }
+
+    @GET
+    @Path("allowed/{id}")
+    public Response getAllowedPhotosOfProfile(@PathParam("id") Integer id) {
+        List<Share> shares = profileBean.getAllowedPhotosOfProfile(id);
+        if (shares.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.status(Response.Status.OK).entity(shares).build();
+    }
+
+    /*@POST
+    @Path("share")
+    public Response sharePhoto(Share share) {
+        Boolean b = profileBean.sharePhoto(share);
+        return Response.status(Response.Status.OK).entity(b).build();
+    }*/
+
 
 }
