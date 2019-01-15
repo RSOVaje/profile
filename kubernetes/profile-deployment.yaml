@@ -13,7 +13,7 @@ spec:
         app: profile
     spec:
       containers:
-      - image: rsovaje/profile:0.4
+      - image: rsovaje/profile:0.5
         name: profile
         env:
         - name: KUMULUZEE_DISCOVERY_CLUSTER

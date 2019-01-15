@@ -16,6 +16,7 @@ import si.fri.pictures.services.configuration.AppProperties;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -31,7 +32,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Logger;
 
-@ApplicationScoped
+@RequestScoped
 public class ProfileBean {
 
     private Logger log = Logger.getLogger(ProfileBean.class.getName());
@@ -96,7 +97,7 @@ public class ProfileBean {
     }
 
     @Timed
-    @CircuitBreaker(requestVolumeThreshold = 3)
+    @CircuitBreaker(requestVolumeThreshold = 1)
     @Timeout(value = 2, unit = ChronoUnit.SECONDS)
     @Fallback(fallbackMethod = "getCataloguesFallback")
     public List<Catalogue> getCatalogues(Integer profileId) {
@@ -117,7 +118,10 @@ public class ProfileBean {
         return Collections.emptyList();
     }
 
-
+    @Timed
+    @CircuitBreaker(requestVolumeThreshold = 1)
+    @Timeout(value = 2, unit = ChronoUnit.SECONDS)
+    @Fallback(fallbackMethod = "getPicturesFallback")
     public List<Picture> getPicture(Integer profileId) {
         if(appProperties.isExternalServicesEnabled() && pictureUrl.isPresent()) {
             try {
@@ -131,6 +135,10 @@ public class ProfileBean {
             }
         }
         return null;
+    }
+
+    public List<Picture> getPicturesFallback(Integer profileId) {
+        return Collections.emptyList();
     }
 
     public List<Share> getSharesOfProfile(Integer id) {
